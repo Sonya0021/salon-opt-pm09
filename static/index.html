@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Парикмахерская Стиль — онлайн-запись на услуги стилистов, прайс-лист, личный кабинет и управление записями.">
+  <title>Парикмахерская «Стиль» — Запись к стилистам</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="logo">✂ Парикмахерская «Стиль»</div>
+    <nav aria-label="Главное меню">
+      <button onclick="showSection('sec-catalog')">Каталог услуг</button>
+      <button id="nav-book" class="hidden" onclick="showSection('sec-booking')">Новая запись</button>
+      <button id="nav-cabinet" class="hidden" onclick="showSection('sec-cabinet')">Личный кабинет</button>
+      <button id="nav-auth" onclick="showSection('sec-auth')">Войти</button>
+      <button id="nav-logout" class="btn-outline hidden" onclick="logout()">Выйти</button>
+    </nav>
+    <div id="user-info" style="font-size:13px;">Гость</div>
+  </header>
+
+  <main>
+    <section id="sec-catalog">
+      <div class="hero">
+        <h1>Запись на услуги стилистов</h1>
+        <div class="filters">
+          <label for="search-q" class="hidden">Поиск услуги</label>
+          <input id="search-q" type="search" placeholder="Поиск услуги (debounce)..." oninput="onSearchInput()">
+          <label for="filter-cat" class="hidden">Категория</label>
+          <select id="filter-cat" onchange="currentPage=1;loadCatalog()">
+            <option value="">Все категории</option>
+            <option value="Стрижки">Стрижки</option>
+            <option value="Окрашивание">Окрашивание</option>
+            <option value="Укладки">Укладки</option>
+            <option value="Уход">Уход</option>
+          </select>
+        </div>
+      </div>
+      <div id="catalog-grid" class="cards"></div>
+      <div id="pagination" class="pagination"></div>
+    </section>
+
+    <section id="sec-booking" class="hidden">
+      <div class="form-box">
+        <h2>Оформление записи к стилисту</h2>
+        <form id="booking-form">
+          <div class="field"><label for="book-service">Услуга стилиста</label><select id="book-service" required></select></div>
+          <div class="field"><label for="book-stylist">Выберите стилиста</label><select id="book-stylist" required></select></div>
+          <div class="field"><label for="book-date">Дата и время визита</label><input id="book-date" type="datetime-local" required></div>
+          <button type="submit" class="btn" style="width:100%;">Подтвердить запись</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="sec-cabinet" class="hidden">
+      <div class="panel">
+        <h2>Управление записями на услуги</h2>
+        <div class="sum-banner">Итоговая сумма по чекам (SUM): <span id="cab-sum">0.00</span> ₽</div>
+        <table>
+          <thead><tr><th>ID</th><th>Клиент</th><th>Услуга</th><th>Стилист</th><th>Цена</th><th>Дата</th><th>Статус</th><th>Действие</th></tr></thead>
+          <tbody id="apps-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="sec-auth" class="hidden">
+      <div class="form-box">
+        <h2>Вход в систему</h2>
+        <form id="login-form">
+          <div class="field"><label for="login-inp">Логин</label><input id="login-inp" type="text" required autocomplete="username"></div>
+          <div class="field"><label for="pass-inp">Пароль</label><input id="pass-inp" type="password" required autocomplete="current-password"></div>
+          <button type="submit" class="btn" style="width:100%;">Войти</button>
+        </form>
+        <p style="font-size:12px;color:#57534e;margin-top:12px;">
+          Тест: <b>Admin / KorokNET</b> | <b>operator1 / Oper1234</b> | <b>testuser / qazqaz123</b>
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
