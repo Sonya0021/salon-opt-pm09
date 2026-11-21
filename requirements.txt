@@ -1,0 +1,6 @@
+Flask==3.0.3
+Flask-CORS==4.0.1
+Flask-Caching==2.3.0
+Flask-Compress==1.15
+PyMySQL==1.1.1
+Werkzeug==3.0.3
